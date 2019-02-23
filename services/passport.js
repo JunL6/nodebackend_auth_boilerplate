@@ -36,6 +36,8 @@ const localLogin = new LocalStrategy(localOptions, function(
   });
 });
 
+/****************** */
+
 /** 2.0, setup options for JWT Strategy */
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader("authorization"),
@@ -43,6 +45,7 @@ const jwtOptions = {
 };
 
 /** 2.1, Create JWT Strategy */
+/** JWT strategy here is used to authenticate get requests' token */
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
   /**  see if the userID in the payload exists in our database */
   User.findById(payload.sub, function(err, user) {
